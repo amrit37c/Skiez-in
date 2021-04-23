@@ -241,27 +241,27 @@
                             <label for="">Document Type</label>
                             <select name='doc_type'>
                                 @if(Request::input('flight_type') == 'international')
-                                <option value="Passport">Passport</option>
+                                <option value="PSPT">Passport</option>
                                 @else
                                 <option value="UIDAI">Adhar</option>
-                                <option value="Passport">Passport</option>
+                                <option value="PSPT">Passport</option>
                                 @endif
                             </select>
                         </div>
 
                         <div class="col-md-6 book_form_detail_two mt-4">
                             <label for="">Document Number</label>
-                            <input type="text" name="doc_number" placeholder="Document Number" />
+                            <input type="text" required name="doc_number" placeholder="Document Number" />
                         </div>
 
                         <div class="col-md-6 book_form_detail_two mt-4">
                             <label for="">Document Expiry</label>
-                            <input type="date" name="doc_expiry" placeholder="Document Expiry" />
+                            <input type="date" required name="doc_expiry" placeholder="Document Expiry" />
                         </div>
 
                         <div class="col-md-6 book_form_detail_two mt-4">
                             <label for="">Issue Country</label>
-                            <input type="text" name="issue_country" placeholder="Issue Country" />
+                            <input type="text" required name="issue_country" placeholder="Issue Country" />
                         </div>
                     </div>
 

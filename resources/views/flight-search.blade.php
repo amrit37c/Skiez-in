@@ -321,7 +321,7 @@
                                     @if(Session::has("user_id"))
                                     <button type="submit">Book</button>
                                     @else
-                                    <a href="#" class="btn_1 d-lg-block d-none main_login" onclick="document.getElementById('id01').style.display='block'">Book</a>
+                                    <a href="#" class="btn_1 d-lg-block main_login" onclick="document.getElementById('id01').style.display='block'">Book</a>
                                     @endif
                                 </div>
                             </div>
@@ -378,6 +378,9 @@
         $requestParams = explode("?", $_SERVER['REQUEST_URI']);
         ?>
         <div class='searched-flights' id="">
+        @if(count($result->onwardJourneys) == 0)
+            <p class='alert alert-danger'>No Results Found<p>
+        @endif
         @foreach($result->onwardJourneys as $flight)
         <div class="row">
             <div class="col-md-6">
@@ -429,7 +432,7 @@
                             @if(Session::has("user_id"))
                             <button type="submit">Book</button>
                             @else
-                            <a href="#" class="btn_1 d-lg-block d-none main_login" onclick="document.getElementById('id01').style.display='block'">Book</a>
+                            <a href="#" class="btn_1 d-lg-block main_login" onclick="document.getElementById('id01').style.display='block'">Book</a>
                             @endif
                         </div>
                     </div>

@@ -420,6 +420,30 @@
                 width: 100%;
             }
         }
+
+        @media(max-width:480px) {
+            .fromtopopup {
+                height: 201px !important;
+                top: unset !important;
+                position: absolute !important;
+                width: 331px !important;
+            }
+
+            .fromtopopup.topopup {
+                left: -165px !important;
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: 3%;
+                border: 1px solid #888;
+                width: 82%;
+                padding: 18px 20px 18px 20px;
+                border-radius: 13px;
+                border: none;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -447,12 +471,12 @@
                         </span><br>
                     </div>
 
-                    <button type="button" class="btn_1 d-none d-lg-block" onclick="generateOtp('custMobileNumber', 'otpResponse1', 'receivedOtp', this, 1)">GENERATE OTP</button>
+                    <button type="button" class="btn_1 d-lg-block" onclick="generateOtp('custMobileNumber', 'otpResponse1', 'receivedOtp', this, 1)">GENERATE OTP</button>
 
 
                     <div class="agent_btm_pop">
                         <p>Are you a Skiez Agent</p>
-                        <button type="button" class="btn_1 d-none d-lg-block" data-toggle="modal" data-target="#exampleModal">Agent Login</button>
+                        <button type="button" class="btn_1 d-lg-block" data-toggle="modal" data-target="#exampleModal">Agent Login</button>
                     </div>
 
                 </div>
@@ -693,7 +717,7 @@
     <script src="{{asset('/public/js/contact.js')}}"></script>
     <!-- custom js -->
     <script src="{{asset('/public/js/custom.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
 
 
     <!-- Login Modal -->
@@ -830,9 +854,9 @@
                             display: "block"
                         });
                         if (type == 2) {
-                            $(otpBtn).replaceWith(`<button type="button" class="btn_1 d-none d-lg-block" onclick="verifyOtp('agentMobileNumber', 'receivedOtpAgent', ${type})">Login</button>`);
+                            $(otpBtn).replaceWith(`<button type="button" class="btn_1 d-lg-block" onclick="verifyOtp('agentMobileNumber', 'receivedOtpAgent', ${type})">Login</button>`);
                         } else {
-                            $(otpBtn).replaceWith(`<button type="button" class="btn_1 d-none d-lg-block" onclick="verifyOtp('custMobileNumber', 'receivedOtp', ${type})">Login</button>`);
+                            $(otpBtn).replaceWith(`<button type="button" class="btn_1 d-lg-block" onclick="verifyOtp('custMobileNumber', 'receivedOtp', ${type})">Login</button>`);
                         }
                     } else {
                         $(`#${msgDiv}`).html(`<p class='alert alert-danger'>${result.message}</p>`);

@@ -612,6 +612,8 @@ class HomeController extends BaseController
   public function sendEmail()
   {
     $data = array('name' => "dsfsfsd", "from" => "DEL", "to" => 'IKA', "booking_id" => 'sfsdf', "email" => "bhavneesh.goyal99@gmail.com");
+    
+    return view('emails.booking-confirmation')->with(array("data" => $data));
     Mail::send('emails.booking-confirmation', ['data' => $data], function ($m) use ($data) {
       $m->from(env('MAIL_USERNAME'), env('APP_NAME'));
 
