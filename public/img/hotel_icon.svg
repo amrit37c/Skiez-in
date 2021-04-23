@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="46" height="30" viewBox="0 0 46 30">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_13337" data-name="Path 13337" d="M0,0H46V30H0Z" transform="translate(403 520)" fill="none" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_44" data-name="Mask Group 44" transform="translate(-403 -520)" clip-path="url(#clip-path)">
+    <g id="iconfinder_ic_local_hotel_48px_352502" transform="translate(409 516.906)">
+      <path id="Path_355" data-name="Path 355" d="M0,0H34.188V34.188H0Z" fill="none"/>
+      <path id="Path_356" data-name="Path 356" d="M10.547,21.4a4.273,4.273,0,1,0-4.273-4.273A4.277,4.277,0,0,0,10.547,21.4Zm17.094-8.547h-11.4V22.82H4.849V10H2V31.367H4.849V27.094H30.49v4.273h2.849V18.547A5.7,5.7,0,0,0,27.641,12.849Z" transform="translate(-0.576 -2.878)" fill="#084039"/>
+    </g>
+  </g>
+</svg>

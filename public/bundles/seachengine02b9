@@ -1,0 +1,745 @@
+function setsearhengine(n, t, i, r, u) {
+    $("#hdn_flying_from").val(n + ", " + r + ", " + u + " (" + t + " - " + i + ")");
+    $("#from_wait").val(n);
+    $("#Fly_Depart_airport").html(i);
+    $("#flying_from_N").val(t);
+    $(".fromtopopup").hide()
+}
+
+function setsearhengine_Return(n, t, i, r, u) {
+    $("#hdn_flying_to").val(n + ", " + r + ", " + u + " (" + t + " - " + i + ")");
+    $("#to_wait").val(n);
+    $("#Fly_Dest_airport").html(i);
+    $("#flying_to_N").val(t);
+    $(".fromtopopup").hide()
+}
+
+function showlogin_new() {
+    $("#login_top1").hasClass("login_top_active") ? $("#login_top1").addClass("login_top_dactive").removeClass("login_top_active") : $("#login_top1").addClass("login_top_active").removeClass("login_top_dactive");
+    $(".login_top_open").show()
+}
+
+function ShowLogin() {
+    $(".login_top_open").show();
+    var n = arr5.value;
+    n == "1" && $("#arr5").val(2);
+    n == "2" && $("#arr5").val(1)
+}
+
+function getval_Cabin() {
+    $("#cabin_id").html($("#ddlCabinClass option:selected").text());
+    $("#travel_Economy").val(document.getElementById("adult").value + " Traveller(s)," + $("#ddlCabinClass option:selected").text())
+}
+
+function SelectTripType(n) {
+    return n == "O" && ($("#Fly_ret_datepickerid").removeAttr("style", "background:#fff"),
+            $("#Fly_ret_datepickerid").attr("disabled", "disabled"),
+            $("#Fly_ret_datepickerid").attr("style", "cursor:no-drop;background:#f5f2f2"),
+            $(".roundway").removeClass("slt"),
+            $(".oneway").addClass("slt"),
+            $("#hfTripType").val("false"),
+            $("#Fly_retdate").val(""),
+            $("#Fly_retdate_val").html("Return Date"),
+            $("#Fly_ret_day").html("for bigger discount")),
+        n == "R" && ($(".oneway").removeClass("slt"),
+            $(".roundway").addClass("slt"),
+            $("#hfTripType").val("true"),
+            $("#Fly_ret_datepickerid").removeAttr("disabled"),
+            $("#Fly_ret_datepickerid").removeAttr("style", "cursor:none"),
+            $("#Fly_ret_datepickerid").attr("style", "background:#fff"),
+            $("#Fly_ret_datepickerid").attr("style", "background:#fff")), !1
+}
+
+function submitsearchOffline(n, t, i) {
+    $("#Fly_depdate").val(n);
+    $("#hfFromDate").val(n);
+    $("#hdn_flying_from").val(t);
+    $("#hdn_flying_to").val(i);
+    $("#from_wait").val(t.split(",")[0]);
+    $("#to_wait").val(i.split(",")[0]);
+    document.getElementById("searchengine_btn").click()
+}
+
+function submitsearch(n, t) {
+    var f, i, r, u;
+    $("#hdn_flying_from").val(n);
+    $("#hdn_flying_to").val(t);
+    $("#from_wait").val(n.split(",")[0]);
+    $("#to_wait").val(t.split(",")[0]);
+    f = new Date;
+    i = new Date;
+    i.setDate(f.getDate() + 30);
+    r = i.getMonth() + 1;
+    u = (i.getDate().toString().length == 1 ? "0" + i.getDate() : i.getDate()) + "/" + (r.toString().length == 1 ? "0" + r : r) + "/" + i.getFullYear();
+    $("#Fly_depdate").val(u);
+    $("#hfFromDate").val(u);
+    $("#hfTripType").val("false");
+    document.getElementById("searchengine_btn").click()
+}
+
+function SetSearchfield(n) {
+    var t = n.split("|"),
+        u, e, r, i, f, o;
+    $("#hdn_flying_from").val(t[0]);
+    $("#hdn_flying_to").val(t[1]);
+    $("#hfFromDate").val(t[2]);
+    r = new Date;
+    u = $("#hfFromDate").val();
+    x = u.indexOf("/") != -1 ? u.split("/") : u.split("-");
+    e = new Date(x[2], x[1] - 1, x[0]);
+    e >= r || (r = new Date,
+        i = new Date,
+        i.setDate(r.getDate() + 2),
+        f = i.getMonth() + 1,
+        o = (i.getDate().toString().length == 1 ? "0" + i.getDate() : i.getDate()) + "/" + (f.toString().length == 1 ? "0" + f : f) + "/" + i.getFullYear(),
+        $("#hfFromDate").val(o));
+    $("#hfToDate").val(t[3]);
+    $("#hfTripType").val(t[4]);
+    $("#ddlCabinClass").val(t[5]);
+    $("#sub1").val(t[6]);
+    $("#sub2").val(t[7]);
+    $("#sub3").val(t[8]);
+    $("#from_wait").val(t[11]);
+    $("#to_wait").val(t[12]);
+    document.getElementById("searchengine_btn").click()
+}
+
+function CheckValidation() {
+    var r = 0,
+        u = 0,
+        f = 0,
+        o = 0,
+        it, i, k, e, d, g, et, a, nt, b, tt;
+    if (r = new Number($("#sub1").val()),
+        u = new Number($("#sub2").val()),
+        f = new Number($("#sub3").val()),
+        o = r + u + f,
+        $("#hdn_flying_from").val() == "" || $("#hdn_flying_from").val().length < 3)
+        return alert("Please enter departure airport!!"), !1;
+    if ($("#hdn_flying_to").val() == "" || $("#hdn_flying_to").val().length < 3)
+        return alert("Please enter destination airport!!"), !1;
+    if ($("#hdn_flying_from").val() == $("#hdn_flying_to").val())
+        return alert("Departure Airport and Destination Airport can't be same!!"), !1;
+    if ($("#hfFromDate").val() == "")
+        return alert("Please enter departure date!!"),
+            $("#Fly_dep_datepickerid").focus(200), !1;
+    if ($("#hfTripType").val() == "true") {
+        if ($("#hfToDate").val() == "")
+            return alert(" Please enter return date!!"),
+                $("#Fly_ret_datepickerid").focus(200), !1
+    } else
+        $("#wait_box_ottIn").hide();
+    if (f > r)
+        return alert("Number of infants should be equal to or less then number of adults!!"), !1;
+    if (u > r * 2)
+        return alert("Maximum number of child should be double number of adults!!"), !1;
+    if (o > 9)
+        return alert("Total no of person should not be more than 9!!"), !1;
+    if (o == 0)
+        return alert("Please Choose passenger!!"), !1;
+    it = /^\d{2}\/\d{2}\/\d{4}$/;
+    i = new Date;
+    i.setDate(i.getDate());
+    var s = i.getDate(),
+        rt = s < 10 ? "0" + s : s,
+        h = i.getMonth() + 1,
+        ut = h < 10 ? "0" + h : h,
+        c = i.getYear(),
+        ft = c < 1e3 ? c + 1900 : c,
+        ot = new Date(ft, ut - 1, rt),
+        n, l = $("#hfFromDate").val();
+    if (n = l.indexOf("/") != -1 ? l.split("/") : l.split("-"),
+        k = new Date(n[2], n[1] - 1, n[0]),
+        $("#hfTripType").val() == "true") {
+        if (e = $("#hfToDate").val(),
+            n = e.indexOf("/") != -1 ? e.split("/") : e.split("-"),
+            d = new Date(n[2], n[1] - 1, n[0]),
+            d < k)
+            return alert("Return Date Must be greater or equal to Depart date"), !1
+    } else
+        $("#hfToDate").val("");
+    if ($("#hfAdult").val(r),
+        $("#hfChild").val(u),
+        $("#hfInfant").val(f),
+        g = $("#chkIsDirect").is(":checked"),
+        $("#hfdirect").val(g),
+        et = 0,
+        $("#device_app").val() == "1")
+        $("#dvProgress_M").show(),
+        $("#from_to_wait").html($("#from_wait").val() + " <i class='fa fa-long-arrow-right'><\/i> " + $("#to_wait").val() + ""),
+        $("#modify").val() == "1" ? $("#hfTripType").val() == "true" ? $("#date_wait").html($("#Fly_depdate_val").html() + " - " + $("#Fly_retdate_val").html() + " - " + document.getElementById("adult").value + " Traveller(s)," + $("#ddlCabinClass option:selected").text()) : $("#date_wait").html($("#Fly_depdate_val").html() + " - " + document.getElementById("adult").value + " Traveller(s)," + $("#ddlCabinClass option:selected").text()) : $("#date_wait").html($("#Fly_depdate").val() + " - " + $("#Fly_retdate").val() + " - " + document.getElementById("adult").value + " Traveller(s)," + $("#ddlCabinClass option:selected").text());
+    else {
+        if ($("#divprogress_D").show(),
+            $("#flying_from_N_Wait").val($("#from_wait").val()),
+            $("#flying_to_N_Wait").val($("#to_wait").val()),
+            $("#modify").val() == "1") {
+            if ($("#Fly_depdate_Wait").val($("#hfFromDate").val()),
+                $("#Fly_retdate_Wait").val($("#hfToDate").val()),
+                a = $("#hfFromDate").val(),
+                a != "") {
+                var t = a.split("/"),
+                    v = t[0],
+                    y = t[1],
+                    p = t[2],
+                    w = getfulfdate(y);
+                nt = v + " " + w + " " + p;
+                $("#Fly_depdate_Wait").val(nt)
+            }
+            if (b = $("#hfToDate").val(),
+                b != "") {
+                var t = b.split("/"),
+                    v = t[0],
+                    y = t[1],
+                    p = t[2],
+                    w = getfulfdate(y);
+                tt = v + " " + w + " " + p;
+                $("#Fly_retdate_Wait").val(tt)
+            }
+        } else
+            $("#Fly_depdate_Wait").val($("#Fly_depdate").val()),
+            $("#Fly_retdate_Wait").val($("#Fly_retdate").val());
+        $("#hfTripType").val() == "true" ? $("#roundway_r_Wait").prop("checked", !0) : $("#oneway_r_Wait").prop("checked", !0);
+        $("#travel_Economy_Wait").val(document.getElementById("adult").value + " Traveller(s)," + $("#ddlCabinClass option:selected").text())
+    }
+    return !0
+}
+
+function checkdata() {
+    var t = $.Event("keydown"),
+        n;
+    t.keyCode = $.ui.keyCode.DOWN;
+    n = $.Event("keydown");
+    n.keyCode = $.ui.keyCode.ENTER;
+    $("#flying_from").trigger(n);
+    $("#flying_to").focus()
+}
+
+function showfilter() {
+    $(".filtbx").show()
+}
+
+function closefilter() {
+    $(".filtbx").hide()
+}
+
+function showmodify() {
+    $(".modifybx").show()
+}
+
+function closemodify() {
+    $(".modifybx").hide()
+}
+
+function checkdata1() {
+    var t = $.Event("keydown"),
+        n;
+    t.keyCode = $.ui.keyCode.DOWN;
+    n = $.Event("keydown");
+    n.keyCode = $.ui.keyCode.ENTER;
+    $("#flying_to").trigger(n);
+    $("#depdate").focus()
+}
+
+function closefun() {
+    $(".filter-result").hide(500);
+    $("body").removeClass("hmbody")
+}
+
+function filshow() {
+    $(".filter-result").show(500);
+    $(".mdsearch").css("display", "none");
+    $("body").addClass("hmbody")
+}
+
+function midfcls() {
+    $(".mdsearch").show(500);
+    $(".filter-result").css("display", "none");
+    $("body").addClass("hmbody")
+}
+
+function mdfclose() {
+    $(".mdsearch").hide(500);
+    $("body").removeClass("hmbody")
+}
+
+function swapfun() {
+    var n = $("#flying_from_N").val(),
+        t = $("#flying_to_N").val();
+    $("#flying_from_N").val(t);
+    $("#flying_to_N").val(n);
+    n = $("#Fly_Depart_airport").html();
+    t = $("#Fly_Dest_airport").html();
+    $("#Fly_Depart_airport").html(t);
+    $("#Fly_Dest_airport").html(n);
+    n = $("#hdn_flying_from").val();
+    t = $("#hdn_flying_to").val();
+    $("#hdn_flying_from").val(t);
+    $("#hdn_flying_to").val(n);
+    n = $("#from_wait").val();
+    t = $("#to_wait").val();
+    $("#from_wait").val(t);
+    $("#to_wait").val(n)
+}
+
+function reset_stop() {
+    $(".resltlayer").show();
+    $(".checkbox_stop").prop("checked", !1)
+}
+
+function reset_airline() {
+    $(".resltlayer").show();
+    $(".checkbox_air").prop("checked", !1)
+}
+
+function reset_departure() {
+    $(".outbound_result").show();
+    $(".checkbox_dep").prop("checked", !1)
+}
+
+function reset_return() {
+    $(".inbound_result").show();
+    $(".checkbox_ret").prop("checked", !1)
+}
+
+function reset_departure_Combind() {
+    $(".outbound_result").show();
+    $(".checkbox_dep").prop("checked", !1)
+}
+
+function reset_return_Combind() {
+    $(".outbound_result").show();
+    $(".checkbox_ret").prop("checked", !1)
+}
+
+function hidepopup() {
+    $(".fromtopopup").hide()
+}
+
+function autodiv_from() {
+    $("#flying_from").val("");
+    $(".frompopup").show();
+    $("#flying_from").focus();
+    $("#flying_from").trigger("click")
+}
+
+function autodiv_to() {
+    $("#flying_to").val("");
+    $(".topopup").show();
+    $("#flying_to").focus();
+    $("#flying_to").trigger("click")
+}
+
+function getfulfdate(n) {
+    var t = "";
+    switch (n) {
+        case "01":
+            t = "Jan";
+            break;
+        case "02":
+            t = "Feb";
+            break;
+        case "03":
+            t = "Mar";
+            break;
+        case "04":
+            t = "Apr";
+            break;
+        case "05":
+            t = "May";
+            break;
+        case "06":
+            t = "Jun";
+            break;
+        case "07":
+            t = "Jul";
+            break;
+        case "08":
+            t = "Aug";
+            break;
+        case "09":
+            t = "Sep";
+            break;
+        case "10":
+            t = "Oct";
+            break;
+        case "11":
+            t = "Nov";
+            break;
+        case "12":
+            t = "Dec"
+    }
+    return t
+}
+
+function DisplayError(n) {
+    var t = document.getElementById(n);
+    t.style.display = "block"
+}
+
+function HideError(n) {
+    var t = document.getElementById(n);
+    t.style.display = "none"
+}
+
+function toDate(n, t) {
+    var i = new Date;
+    return t == "h:m" ? (i.setHours(n.substr(0, n.indexOf(":"))),
+        i.setMinutes(n.substr(n.indexOf(":") + 1)),
+        i.setSeconds(0),
+        i) : "Invalid Format"
+}
+
+function setVar(n) {
+    min = 0;
+    sec = 59;
+    clearInterval(int1);
+    min = n;
+    min = min - 1;
+    int1 = self.setInterval("MiliSec()", 1e3)
+}
+
+function MiliSec() {
+    min == 0 && sec == 0 && (clearInterval(int1),
+        callSessionTimeOut());
+    sec > 0 ? (document.getElementById("watch").innerHTML = "" + min + ":" + sec + "",
+        sec = sec - 1,
+        sec < 10 && (sec = "0" + sec)) : (sec = 60,
+        min = min - 1,
+        min < 10 && (min = "0" + min),
+        document.getElementById("watch").value = min > 0 ? "This page will expire in " + min + ":" + sec + " minutes." : "This page is expired")
+}
+
+function callSessionTimeOut() {
+    return $(".sessionpop").show(), !0
+}
+
+function isInteger(n) {
+    for (var i, t = 0; t < n.length; t++)
+        if (i = n.charAt(t),
+            i < "0" || i > "9")
+            return !1;
+    return !0
+}
+
+function stripCharsInBag(n, t) {
+    for (var r, i = 0; i < n.length; i++)
+        if (r = n.charAt(i),
+            t.indexOf(r) == -1)
+            return String += r;
+    return ""
+}
+
+function daysInFebruary(n) {
+    return n % 4 == 0 && (!(n % 100 == 0) || n % 400 == 0) ? 29 : 28
+}
+
+function DaysArray(n) {
+    for (var t = 1; t <= n; t++)
+        this[t] = 31,
+        (t == 4 || t == 6 || t == 9 || t == 11) && (this[t] = 30),
+        t == 2 && (this[t] = 29);
+    return this
+}
+var numberOfMonths, dateFormat;
+$(document).mouseup(function(n) {
+    var t = $(".popup");
+    0 === t.has(n.target).length && t.hide();
+    t = $(".fromtopopup");
+    0 === t.has(n.target).length && t.hide();
+    t = $(".login_top_open");
+    0 === t.has(n.target).length && t.hide()
+});
+$(document).ready(function() {
+    $(".closelogin").click(function() {
+        $(".login_top_open").hide()
+    });
+    $(".more-details").click(function() {
+        $(".more-option").slideToggle("slow")
+    });
+    $("#inlineRadio1").click(function() {
+        $("#inlineRadio1").is(":checked") && $("#Returningdiv").show(500)
+    });
+    $("#inlineRadio2").click(function() {
+        $("#inlineRadio2").is(":checked") && $("#Returningdiv").hide(500)
+    });
+    $("#adult_div").click(function() {
+        $(".adultdrop").show()
+    });
+    $(".done").click(function() {
+        $(".adultdrop").hide();
+        $("#select_class").focus()
+    });
+    $("#sub1plus").click(function() {
+        var n = parseFloat($("#sub1").val()),
+            i = parseFloat($("#sub2").val()),
+            r = parseFloat($("#sub3").val()),
+            t;
+        n + i + r >= 9 ? (n = "Total no of person should not be more than 9!!",
+            n += "Call us  for bulk bookings.",
+            alert(n),
+            document.getElementById("sub1plus").disabled = !0,
+            document.getElementById("sub2plus").disabled = !0,
+            document.getElementById("sub3plus").disabled = !0) : (t = $("#sub1").val(),
+            $("#sub1").val(parseInt(t) + 1))
+    });
+    $("#sub1minus").click(function() {
+        document.getElementById("sub1plus").disabled = !1;
+        document.getElementById("sub2plus").disabled = !1;
+        document.getElementById("sub3plus").disabled = !1;
+        var n = $("#sub1").val();
+        1 != parseInt(n) && $("#sub1").val(parseInt(n) - 1)
+    });
+    $("#sub2plus").click(function() {
+        var n = parseFloat($("#sub1").val()),
+            i = parseFloat($("#sub2").val()),
+            r = parseFloat($("#sub3").val()),
+            t;
+        n + i + r >= 9 ? (n = "Total no of person should not be more than 9!!",
+            n += "\nCall us  for bulk bookings.",
+            alert(n),
+            document.getElementById("sub1plus").disabled = !0,
+            document.getElementById("sub2plus").disabled = !0,
+            document.getElementById("sub3plus").disabled = !0) : (t = $("#sub2").val(),
+            $("#sub2").val(parseInt(t) + 1))
+    });
+    $("#sub2minus").click(function() {
+        document.getElementById("sub1plus").disabled = !1;
+        document.getElementById("sub2plus").disabled = !1;
+        document.getElementById("sub3plus").disabled = !1;
+        var n = $("#sub2").val();
+        0 != parseInt(n) && $("#sub2").val(parseInt(n) - 1)
+    });
+    $("#sub3plus").click(function() {
+        var n = parseFloat($("#sub1").val()),
+            i = parseFloat($("#sub2").val()),
+            r = parseFloat($("#sub3").val()),
+            t;
+        n + i + r >= 9 ? (n = "Total no of person should not be more than 9!!",
+            n += "\nCall us  for bulk bookings.",
+            alert(n),
+            document.getElementById("sub1plus").disabled = !0,
+            document.getElementById("sub2plus").disabled = !0,
+            document.getElementById("sub3plus").disabled = !0) : (t = $("#sub3").val(),
+            $("#sub3").val(parseInt(t) + 1))
+    });
+    $("#sub3minus").click(function() {
+        document.getElementById("sub1plus").disabled = !1;
+        document.getElementById("sub2plus").disabled = !1;
+        document.getElementById("sub3plus").disabled = !1;
+        var n = $("#sub3").val();
+        0 != parseInt(n) && $("#sub3").val(parseInt(n) - 1)
+    });
+    $(".maincalulation").click(function() {
+        var n = $("#sub1").val(),
+            t = $("#sub2").val(),
+            i = $("#sub3").val();
+        alert(n, t, i);
+        document.getElementById("adult").value = parseInt(n) + parseInt(t) + parseInt(i);
+        $("#travel_id").html(document.getElementById("adult").value);
+        $("#travel_Economy").val(document.getElementById("adult").value + " Traveller(s)," + $("#ddlCabinClass option:selected").text())
+    });
+    $("#select_class").click(function() {
+        $(".selectclass").show()
+    });
+    $(".class1").click(function() {
+        var n = $(this).html();
+        $("#select_class").val(n);
+        $(".selectclass").hide();
+        $("#Select_Airline").focus()
+    });
+    $("#Select_Airline").click(function() {
+        $(".airlinedrop").show()
+    });
+    $(".s_airline").click(function() {
+        var n = $(this).html();
+        $("#Select_Airline").val(n);
+        $(".airlinedrop").hide()
+    });
+    $("#shortby").click(function() {
+        $(".airlinedrop").show()
+    });
+    $(".s_airline").click(function() {
+        var n = $(this).html();
+        $("#shortby").val(n);
+        $(".airlinedrop").hide()
+    })
+});
+numberOfMonths = 2;
+dateFormat = "mm/dd/yy";
+/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && (numberOfMonths = 1);
+$(function() {
+        $("#modify").val() == "2" && (dateFormat = "dd M yy");
+        $("#Fly_dep_datepickerid").click(function() {
+            $("#Fly_depdate").datepicker("show")
+        });
+        $("#Fly_ret_datepickerid").click(function() {
+            $("#hfTripType").val() == "true" && $("#Fly_retdate").datepicker("show")
+        });
+        $("#Fly_depdate").datepicker({
+            minDate: 0,
+            changeMonth: !1,
+            dateFormat: dateFormat,
+            numberOfMonths: numberOfMonths,
+            prevText: '<i class="fa fa-chevron-left"><\/i>',
+            nextText: '<i class="fa fa-chevron-right"><\/i>',
+            onClose: function(n) {
+                $("#hfTripType").val() == "true" && ($("#Fly_retdate").datepicker("option", "minDate", n),
+                    $("#modify").val() == "1" ? $("#Fly_ret_datepickerid").trigger("click") : $("#Fly_retdate").focus())
+            },
+            onSelect: function(n) {
+                var t = [],
+                    r, i, u;
+                t[0] = "Jan";
+                t[1] = "Feb";
+                t[2] = "Mar";
+                t[3] = "Apr";
+                t[4] = "May";
+                t[5] = "Jun";
+                t[6] = "Jul";
+                t[7] = "Aug";
+                t[8] = "Sep";
+                t[9] = "Oct";
+                t[10] = "Nov";
+                t[11] = "Dec";
+                r = [];
+                r[0] = "Sunday";
+                r[1] = "Monday";
+                r[2] = "Tuesday";
+                r[3] = "Wednesday";
+                r[4] = "Thursday ";
+                r[5] = "Friday";
+                r[6] = "Saturday";
+                i = new Date(n);
+                n.indexOf("/") != -1 ? (u = n.split("/"),
+                    (i.getMonth() + 1).toString().length == "1" ? $("#hfFromDate").val(u[1] + "/0" + (i.getMonth() + 1) + "/" + i.getFullYear()) : $("#hfFromDate").val(u[1] + "/" + (i.getMonth() + 1) + "/" + i.getFullYear()),
+                    $("#Fly_depdate_val").html("<big>" + u[1] + "<\/big> " + t[i.getMonth()] + "'" + u[2].replace("2019", "19").replace("2020", "20").replace("2021", "21")),
+                    $("#Fly_dep_day").text(r[i.getDay()]),
+                    $("#Fly_ret_datepickerid").focus(200)) : (u = n.split(" "),
+                    (i.getMonth() + 1).toString().length == "1" ? $("#hfFromDate").val(u[0] + "/0" + (i.getMonth() + 1) + "/" + i.getFullYear()) : $("#hfFromDate").val(u[0] + "/" + (i.getMonth() + 1) + "/" + i.getFullYear()))
+            }
+        });
+        $("#Fly_retdate").datepicker({
+            minDate: 0,
+            defaultDate: "+1w",
+            dateFormat: dateFormat,
+            numberOfMonths: numberOfMonths,
+            changeMonth: !1,
+            prevText: '<i class="fa fa-chevron-left"><\/i>',
+            nextText: '<i class="fa fa-chevron-right"><\/i>',
+            onClose: function() {},
+            onSelect: function(n) {
+                var t = [],
+                    r, i, u;
+                t[0] = "Jan";
+                t[1] = "Feb";
+                t[2] = "Mar";
+                t[3] = "Apr";
+                t[4] = "May";
+                t[5] = "Jun";
+                t[6] = "Jul";
+                t[7] = "Aug";
+                t[8] = "Sep";
+                t[9] = "Oct";
+                t[10] = "Nov";
+                t[11] = "Dec";
+                r = [];
+                r[0] = "Sunday";
+                r[1] = "Monday";
+                r[2] = "Tuesday";
+                r[3] = "Wednesday";
+                r[4] = "Thursday ";
+                r[5] = "Friday";
+                r[6] = "Saturday";
+                i = new Date(n);
+                n.indexOf("/") != -1 ? (u = n.split("/"),
+                    (i.getMonth() + 1).toString().length == "1" ? $("#hfToDate").val(u[1] + "/0" + (i.getMonth() + 1) + "/" + i.getFullYear()) : $("#hfToDate").val(u[1] + "/" + (i.getMonth() + 1) + "/" + i.getFullYear()),
+                    $("#Fly_retdate_val").html("<big>" + u[1] + "<\/big> " + t[i.getMonth()] + "'" + u[2].replace("2019", "19").replace("2020", "20").replace("2021", "21")),
+                    $("#Fly_ret_day").text(r[i.getDay()])) : (u = n.split(" "),
+                    (i.getMonth() + 1).toString().length == "1" ? $("#hfToDate").val(u[0] + "/0" + (i.getMonth() + 1) + "/" + i.getFullYear()) : $("#hfToDate").val(u[0] + "/" + (i.getMonth() + 1) + "/" + i.getFullYear()))
+            }
+        })
+    }),
+    function(n, t) {
+        typeof exports == "object" ? t(exports) : typeof define == "function" && define.amd ? define(["exports"], t) : t(n)
+    }(this, function(n) {
+        return n.Progress = function() {
+                "use strict";
+                var n, t, i, r, u, f, e = {
+                        width: "100%",
+                        height: "37px",
+                        zIndex: 99,
+                        top: "0"
+                    },
+                    o = {
+                        width: 0,
+                        height: "100%",
+                        clear: "both",
+                        transition: "height .2s"
+                    };
+                return n = function(n, t) {
+                        var i;
+                        for (i in t)
+                            n.style[i] = t[i];
+                        n.style.float = "left"
+                    },
+                    r = function() {
+                        var n = this,
+                            t = this.width - this.here;
+                        t < .1 && t > -.1 ? (u.call(this, this.here),
+                            this.moving = !1,
+                            this.width == 100 && (this.el.style.height = 0,
+                                setTimeout(function() {
+                                    n.cont.el.removeChild(n.el)
+                                }, 300))) : (u.call(this, this.width - t / 4),
+                            setTimeout(function() {
+                                n.go()
+                            }, 120))
+                    },
+                    u = function(n) {
+                        this.width = n;
+                        this.el.style.width = this.width + "%"
+                    },
+                    f = function() {
+                        var n = new t(this);
+                        this.bars.unshift(n)
+                    },
+                    t = function(t) {
+                        this.el = document.createElement("mydiv");
+                        this.el.style.backgroundColor = t.opts.bg;
+                        this.width = 0;
+                        this.here = 0;
+                        this.moving = !1;
+                        this.cont = t;
+                        n(this.el, o);
+                        t.el.appendChild(this.el)
+                    },
+                    t.prototype.go = function(n) {
+                        n ? (this.here = n,
+                            this.moving || (this.moving = !0,
+                                r.call(this))) : this.moving && r.call(this)
+                    },
+                    i = function(t) {
+                        var i = this.opts = t || {},
+                            r, u;
+                        i.bg = i.bg;
+                        this.bars = [];
+                        r = this.el = document.createElement("div");
+                        n(this.el, e);
+                        i.id && (r.id = i.id);
+                        r.style.position = i.target ? "relative" : "relative";
+                        i.target ? i.target.insertBefore(r, i.target.firstChild) : (u = document.getElementById("progressbar"),
+                            u.appendChild(r));
+                        f.call(this)
+                    },
+                    i.prototype.go = function(n) {
+                        this.bars[0].go(n);
+                        n == 100 && f.call(this)
+                    },
+                    i
+            }(),
+            n.Progress
+    });
+var int1, sec = 59,
+    min, dtCh = "/",
+    minYear = 1900,
+    maxYear = 2100
