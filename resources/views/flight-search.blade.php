@@ -27,7 +27,8 @@
                                     <input type="hidden" name="hdn_flying_from" id="hdn_flying_from" value="" />
                                     <input type="hidden" name="hdn_flying_to" id="hdn_flying_to" value="" />
                                     <input type="hidden" name="modify" id="modify" value="1" />
-
+                                    <input type="hidden" name="fromFullName" >
+                                    <input type="hidden" name="toFullName" >
                                     <section class="serchBox">
                                         <div class="searchEng">
                                             <div class="waybtn" style="width:29%;">
@@ -40,7 +41,7 @@
 
                                                     <input type="text" name="flying_from_N" data-target="Fly_Depart_airport" data-search-results="fromResults" value="<?= $_GET["flying_from_N"] ?>" class="fly-from-input airportslist" placeholder="From" id="flying_from_N" onclick="autodiv_from();" />
 
-                                                    <b id="Fly_Depart_airport">Airport Name or City Name</b>
+                                                    <b id="Fly_Depart_airport"><?= $_GET['fromFullName'] ?></b>
 
                                                     <img src="{{asset('/public/img/swap.png')}}" style="cursor:pointer;" width="31" height="30" alt="Swap" title="Swap">
                                                     <div class="fromtopopup frompopup">
@@ -55,7 +56,7 @@
 
                                                     <strong>To</strong>
                                                     <input name="flying_to_N" type="text" data-target="Fly_Dest_airport" data-search-results="toResults" class="fly-to-input airportslist" value="<?= $_GET["flying_to_N"] ?>" placeholder="To" id="flying_to_N" onclick="autodiv_to();" />
-                                                    <b id="Fly_Dest_airport">Airport Name or City Name</b>
+                                                    <b id="Fly_Dest_airport"><?= $_GET['toFullName'] ?></b>
 
                                                     <div class="fromtopopup topopup">
                                                         <div class="search_flight_result_div">

@@ -213,7 +213,7 @@
                                         <div class="layover_flights_dtl">
                                             <img src="img/flight_logo3.svg" />
                                             <span>
-                                                <h5>Mahan</h5>
+                                                <h5>{{isset(json_decode($flightsDetails['flightRepsonse'])->flights[0]->carrier->name) ? json_decode($flightsDetails['flightRepsonse'])->flights[0]->carrier->name : 'Mahan'}}</h5>
                                                 <h6>{{$flightsDetails['flightNumber']}}</h6>
                                                 <!-- <p>2h 30m</p> -->
                                             </span>

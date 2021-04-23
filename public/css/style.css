@@ -10302,3 +10302,28 @@ div#top-to-bottom>div {
     -webkit-transform: scaleY(-1);
     transform: scaleY(-1);
 }
+
+.price_book_shownd_flight button {
+    background: #084039;
+    color: #fff !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    padding: 5px 30px;
+    border-radius: 7px;
+    cursor: pointer;
+    border: none;
+}
+
+.price_book_shownd_flight button:hover {
+    background: #F7951F;
+    color: #fff;
+}
+
+.book_formsec_1 {
+    background: #FFFFFF;
+    border: 1px solid #D4DEE5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    padding-bottom: 20px;
+}

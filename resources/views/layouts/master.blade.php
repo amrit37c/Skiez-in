@@ -722,6 +722,7 @@
                 var searchTarget = $(this).attr("data-search-results");
                 var dataTarget = $(this).attr("data-target");
                 var inputField = $(this).attr("name");
+                var fullName = $(this).attr("data-full-name");
                 if (code.length < 3) {
                     return;
                 }
@@ -737,7 +738,7 @@
                                 var a = 0;
                                 var popup = ``;
                                 while (a < result.length) {
-                                    popup += `<li data-action='fillairport' data-input='${inputField}' data-target='${dataTarget}' data-code='${result[a].code}' data-name='${result[a].name}' data-country='${result[a].country}'>
+                                    popup += `<li data-action='fillairport' data-full-name='${fullName}' data-input='${inputField}' data-target='${dataTarget}' data-code='${result[a].code}' data-name='${result[a].name}' data-country='${result[a].country}'>
                                             <i class="fas fa-plane"></i> ${result[a].name},${result[a].location} - ${result[a].country} <b>[${result[a].code}]</b>
                                         </li>`;
                                     a++;
@@ -756,8 +757,10 @@
                 // console.log($(this).attr("data-target"));
                 var targetElem = $(this).attr("data-target");
                 var inputFields = $(this).attr("data-input");
+                var fullName = $(this).attr("data-full-name");
                 $(`[name='${inputFields}']`).val($(this).attr("data-code"));
                 $(`#${targetElem}`).html($(this).text());
+                $(`[name=${fullName}]`).val($(this).text())
                 $(".fromtopopup").css({
                     "display": "none"
                 });

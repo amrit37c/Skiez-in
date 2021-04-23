@@ -43,6 +43,8 @@
                                     <input type="hidden" name="hdn_flying_from" id="hdn_flying_from" value="" />
                                     <input type="hidden" name="hdn_flying_to" id="hdn_flying_to" value="" />
                                     <input type="hidden" name="modify" id="modify" value="1" />
+                                    <input type="hidden" name="fromFullName" >
+                                    <input type="hidden" name="toFullName" >
 
                                     <section class="serchBox">
                                         <div class="searchEng">
@@ -67,7 +69,7 @@
                                                 <div class="col-6 col-lg-3 lbl swap">
                                                     <strong class="swap">From </strong>
 
-                                                    <input type="text" name="flying_from_N" data-target="Fly_Depart_airport" autocomplete="off" data-search-results="fromResults" value="" class="fly-from-input airportslist" placeholder="From" id="flying_from_N" onclick="autodiv_from();" />
+                                                    <input type="text" name="flying_from_N" data-target="Fly_Depart_airport" data-full-name="fromFullName" autocomplete="off" data-search-results="fromResults" value="" class="fly-from-input airportslist" placeholder="From" id="flying_from_N" onclick="autodiv_from();" />
 
                                                     <b id="Fly_Depart_airport">Airport Name or City Name</b>
 
@@ -83,7 +85,7 @@
                                                 <div class="col-6 col-lg-3 lbl">
 
                                                     <strong>To</strong>
-                                                    <input name="flying_to_N" type="text" data-target="Fly_Dest_airport" autocomplete="off" data-search-results="toResults" class="fly-to-input airportslist" value="" placeholder="To" id="flying_to_N" onclick="autodiv_to();" />
+                                                    <input name="flying_to_N" type="text" data-target="Fly_Dest_airport" data-full-name="toFullName" autocomplete="off" data-search-results="toResults" class="fly-to-input airportslist" value="" placeholder="To" id="flying_to_N" onclick="autodiv_to();" />
                                                     <b id="Fly_Dest_airport">Airport Name or City Name</b>
 
                                                     <div class="fromtopopup topopup">

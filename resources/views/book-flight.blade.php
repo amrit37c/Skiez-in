@@ -42,7 +42,7 @@
 
                                                     <input type="text" readonly name="flying_from_N" data-target="Fly_Depart_airport" data-search-results="fromResults" value="<?= @$_GET["flying_from_N"] ?>" class="fly-from-input airportslist" placeholder="From" id="flying_from_N" />
 
-                                                    <b id="Fly_Depart_airport">Airport Name or City Name</b>
+                                                    <b id="Fly_Depart_airport"><?= $_GET['fromFullName'] ?></b>
 
                                                     <img src="{{asset('/public/img/swap.png')}}" style="cursor:pointer;" width="31" height="30" alt="Swap" title="Swap">
                                                     <div class="fromtopopup frompopup">
@@ -57,7 +57,7 @@
 
                                                     <strong>To</strong>
                                                     <input name="flying_to_N" readonly type="text" data-target="Fly_Dest_airport" data-search-results="toResults" class="fly-to-input airportslist" value="<?= @$_GET["flying_to_N"] ?>" placeholder="To" id="flying_to_N"/>
-                                                    <b id="Fly_Dest_airport">Airport Name or City Name</b>
+                                                    <b id="Fly_Dest_airport"><?= $_GET['toFullName'] ?></b>
 
                                                     <div class="fromtopopup topopup">
                                                         <div class="search_flight_result_div">
@@ -198,7 +198,7 @@
             <form action="{{route('reviewBooking')}}" method="post">
                 <input type="hidden" value="{{csrf_token()}}" name="_token">
                 <div class="col-md-10 mx-auto">
-                    <div class="row book_formsec_1">
+                <div class="row book_formsec_1">
                         <div class="col-md-12 book_formtop_info">
                             <p><i class="fas fa-info-circle"></i> Please make sure the details entered below are exactly as per Traveller's ID</p>
                         </div>
@@ -207,7 +207,7 @@
                         <!--    <h5>MR. <span>Above 12 years</span></h5>-->
                         <!--</div>-->
 
-                        <div class="col-md-2 book_form_detail">
+                        <div class="col-md-2 book_form_detail mt-4">
                             <label for="title">Title</label>
                             <select name="title" id="title">
                                 <option value="Mr">Mr</option>
@@ -218,26 +218,24 @@
                             </select>
                         </div>
 
-                        <div class="col-md-5 book_form_detail_two">
+                        <div class="col-md-4 book_form_detail_two mt-4">
                             <label for="">First Name / Given Name</label>
                             <input type="text" required placeholder="First Name" name="first_name" value="{{ @Session::get('user_type') == 1 ? @Session::get('user_details')['first_name'] : '' }}" />
                         </div>
 
-                        <div class="col-md-5 book_form_detail_two">
+                        <div class="col-md-3 book_form_detail_two mt-4">
                             <label for="">Last Name / Surname</label>
                             <input type="text" required placeholder="Last Name" name="last_name" value="{{ @Session::get('user_type') == 1 ? @Session::get('user_details')['last_name'] : '' }}" />
                         </div>
 
-                        <div class="col-md-2">
-                        </div>
+                        
 
-                        <div class="col-md-5 book_form_detail_three mt-1">
+                        <div class="col-md-3 book_form_detail_two mt-4">
                             <label for="">Date of Birth</label>
                             <input type="date" required name="date_of_birth" value="{{ @Session::get('user_type') == 1 ? @Session::get('user_details')['date_of_birth'] : '' }}">
                         </div>
 
-                        <div class="col-md-5">
-                        </div>
+                        
 
                         <div class="col-md-6 book_form_detail_two mt-4">
                             <label for="">Document Type</label>
@@ -266,7 +264,6 @@
                             <input type="text" name="issue_country" placeholder="Issue Country" />
                         </div>
                     </div>
-
 
                     <div class="row book_formsec_1">
                         <div class="col-md-12 book_formsec_form_top_head_two">
